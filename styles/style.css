@@ -1,0 +1,77 @@
+:root {
+  --thin-line: 0px 1px 1px rgba(181, 181, 181, 0.102);
+  --padding-horizontal: 0 20px;
+  --default-text-color: black;
+}
+
+html {
+  height: 100vh;
+  overflow: hidden;
+  font-family: "FigTree";
+  font-size: 110%;
+}
+
+a {
+  color: var(--default-text-color);
+  text-decoration: none;
+}
+
+/* nav */
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: var(--thin-line);
+}
+
+
+main {
+  display: flex;
+  flex-grow: 1;
+  background-color: rgba(229, 229, 229, 0.344);
+}
+
+/* navigation menu */
+aside {
+  white-space: nowrap;
+  padding: var(--padding-horizontal);
+  padding-top: 20px;
+}
+
+aside ul {
+  display: grid;
+  gap: 1.2rem;
+  font-size: 1.2rem;
+}
+
+#active {
+  text-decoration: underline;
+}
+
+
+/* grid section */
+h2 {
+  margin-top: 1rem;
+}
+
+#post-grid {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 30px 20px 5rem 0;
+  overflow: scroll;
+}
+
+
+/* Card */
+article {
+  background-color: hsl(0, 0%, 64%);
+}
+
+article footer {
+  display: flex;
+  justify-content: end;
+}
