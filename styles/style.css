@@ -11,9 +11,19 @@ html {
   font-size: 110%;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   color: var(--default-text-color);
   text-decoration: none;
+}
+
+section {
+  width: 100%;
 }
 
 /* nav */
@@ -25,10 +35,9 @@ header nav {
   box-shadow: var(--thin-line);
 }
 
-
 main {
   display: flex;
-  flex-grow: 1;
+  height: 100%;
   background-color: rgba(229, 229, 229, 0.344);
 }
 
@@ -49,7 +58,6 @@ aside ul {
   text-decoration: underline;
 }
 
-
 /* grid section */
 h2 {
   margin-top: 1rem;
@@ -57,12 +65,12 @@ h2 {
 
 #post-grid {
   width: 100%;
-  height: 100vh;
+  max-height: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
   gap: 1rem;
-  padding: 30px 20px 5rem 0;
-  overflow: scroll;
+  padding: 30px 20px 10rem 0;
+  overflow-y: scroll;
 }
 
 
@@ -74,4 +82,32 @@ article {
 article footer {
   display: flex;
   justify-content: end;
+}
+
+/* dialog */
+
+.pico dialog article {
+  max-width: 1100px;
+  height: 80vh;
+}
+
+.pico dialog article div {
+  padding: 0 100px;
+}
+
+.pico dialog #close {
+  width: 4rem;
+  height: 4rem;
+  background-size: auto 2rem;
+  margin-bottom: 0;
+}
+
+button:focus {
+  box-shadow: none;
+}
+
+hgroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
