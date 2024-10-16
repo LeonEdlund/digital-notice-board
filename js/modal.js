@@ -2,7 +2,7 @@
 const isOpenClass = "modal-is-open";
 const openingClass = "modal-is-opening";
 const closingClass = "modal-is-closing";
-const animationDuration = 500; // ms
+const animationDuration = 400; // ms
 
 // Toggle modal
 async function toggleModal(event, modalId, postId = null) {
