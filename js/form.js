@@ -1,16 +1,17 @@
-document.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", init);
 
 function init() {
   initializeDatePicker();
-  eventListenerForDate();
-  removeDateOnCategoryChange()
+  addEventListeners();
 }
 
+/* --------- INITIALIZE DATEPICKER ------------ */
 function initializeDatePicker() {
   const elem = document.getElementById('datepicker');
   const today = new Date();
 
-  const twoMonthsAhead = new Date();
+  // set date 2 months in the future
+  let twoMonthsAhead = new Date();
   twoMonthsAhead.setMonth(today.getMonth() + 2);
 
   new Datepicker(elem, {
@@ -20,10 +21,20 @@ function initializeDatePicker() {
     maxNumberOfDates: 10,
     minDate: today,
     maxDate: twoMonthsAhead,
+    dateDelimiter: ', ',
+    language: 'sv'
   });
 }
 
-function eventListenerForDate() {
+/* --------- EVENT LISTENERS ------------ */
+function addEventListeners() {
+  handleCheckboxChange();
+  handleCategoryChange();
+  handleInfoBox();
+  formValidation();
+}
+
+function handleCheckboxChange() {
   const checkBox = document.getElementById("checkbox");
   const datePicker = document.getElementById('datepicker');
 
@@ -37,21 +48,39 @@ function eventListenerForDate() {
   });
 }
 
-function removeDateOnCategoryChange() {
-  const categories = document.getElementById("category");
-  const dateField = document.getElementById('date-section');
+function handleCategoryChange() {
+  const categoriesSelect = document.getElementById("category");
+  const dateFieldDiv = document.getElementById('date-section');
 
-  categories.addEventListener("change", () => {
-    switch (categories.value) {
-      case "buy":
-      case "info":
-        clearDatePicker();
-        dateField.style.display = 'none';
-        break;
-      default:
-        dateField.style.display = 'block';
+  categoriesSelect.addEventListener("change", () => {
+    const categoriesWithNoDate = ["buy", "info", "lost"];
+    if (categoriesWithNoDate.includes(categoriesSelect.value)) {
+      clearDatePicker();
+      dateFieldDiv.style.display = 'none';
+    } else {
+      dateFieldDiv.style.display = 'block';
     }
   });
+}
+
+function handleInfoBox() {
+  const infoIcon = document.getElementById("info-icon");
+  const infoDiv = document.getElementById("info-box");
+  infoDiv.style.display = infoDiv.style.display || "none";
+
+  infoIcon.addEventListener("click", () => {
+    infoDiv.style.display = (infoDiv.style.display === "none") ? "block" : "none";
+  });
+
+  document.addEventListener("click", (event) => {
+    if (infoDiv.style.display === "block" && !infoDiv.contains(event.target) && event.target !== infoIcon) {
+      infoDiv.style.display = "none";
+    }
+  });
+}
+
+function formValidation() {
+
 }
 
 function clearDatePicker() {

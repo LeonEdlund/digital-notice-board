@@ -1,7 +1,9 @@
+/*----------- DEFAULT --------------*/
 :root {
   --thin-line: 0px 1px 1px rgba(181, 181, 181, 0.102);
   --padding-horizontal: 0 20px;
   --default-text-color: black;
+  --default-red: rgb(155, 0, 0);
 }
 
 html {
@@ -26,7 +28,7 @@ section {
   width: 100%;
 }
 
-/* nav */
+/*----------- NAV --------------*/
 header nav {
   display: flex;
   justify-content: space-between;
@@ -41,7 +43,7 @@ main {
   background-color: rgba(229, 229, 229, 0.344);
 }
 
-/* navigation menu */
+/*----------- ASIDE MENU --------------*/
 aside {
   white-space: nowrap;
   padding: var(--padding-horizontal);
@@ -58,7 +60,7 @@ aside ul {
   text-decoration: underline;
 }
 
-/* grid section */
+/*----------- GRID SECTION --------------*/
 h2 {
   margin-top: 1rem;
 }
@@ -74,7 +76,7 @@ h2 {
 }
 
 
-/* Card */
+/*----------- CARD --------------*/
 .img-container {
   height: 400px;
 }
@@ -83,6 +85,7 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
 }
 
 article footer {
@@ -90,7 +93,7 @@ article footer {
   justify-content: end;
 }
 
-/* dialog */
+/*----------- POST MODALS --------------*/
 .pico dialog article {
   max-width: 1100px;
   height: 80vh;
@@ -98,6 +101,11 @@ article footer {
 
 .pico dialog article>div {
   padding: 0 100px;
+}
+
+.text-content {
+  height: 6rem;
+  overflow: hidden;
 }
 
 .pico dialog #close {
@@ -117,14 +125,29 @@ hgroup {
   justify-content: space-between;
 }
 
-/* upload modal */
+#modal-wrapper img {
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 1rem;
+}
 
-#upload-modal article {
+/*----------- UPLOAD MODAL --------------*/
+#upload-modal article,
+#feedback-modal article {
   width: 100%;
   max-width: 1700px;
   margin: 0 1rem;
   display: flex;
   flex-direction: column;
+}
+
+#feedback-modal h3 {
+  margin: auto;
+}
+
+#checkbox {
+  height: 2rem;
+  width: 2rem;
 }
 
 #upload-grid {
@@ -144,10 +167,15 @@ hgroup {
 
 }
 
+#qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+}
+
 #qr-placeholder {
-  background-color: aquamarine;
-  height: 200px;
-  width: 200px;
+  max-width: 250px;
 }
 
 #form-wrapper {
@@ -176,4 +204,62 @@ form {
 
 #datepicker {
   max-width: 40%;
+}
+
+#submit-btn {
+  max-width: 10rem;
+  float: right;
+}
+
+/* DATEPICKER */
+.datepicker-controls {
+  align-items: center;
+}
+
+.datepicker-header .datepicker-controls button:first-of-type,
+.datepicker-header .datepicker-controls button:last-of-type {
+  font-size: 2rem !important;
+}
+
+.datepicker-view {
+  width: 25rem;
+  height: 20rem;
+  font-size: 1.2rem;
+}
+
+.datepicker-footer .datepicker-controls .button {
+  font-size: 1rem;
+}
+
+
+#icon-wrapper {
+  position: relative;
+}
+
+#icon-wrapper img:active {
+  scale: 0.9;
+}
+
+#info-box {
+  display: none;
+  position: absolute;
+  font-size: 1.1rem;
+  padding: 1rem;
+  left: 50px;
+  top: 5px;
+  min-width: 30rem;
+
+  background-color: rgb(244, 244, 244);
+  box-shadow: 0 3px 8px rgba(120, 120, 120, 0.255);
+  border-radius: 5px;
+}
+
+#icon-wrapper p {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+form .validation-error {
+  border-color: rgb(255, 140, 140);
+  background-color: rgba(255, 186, 186, 0.121);
 }
