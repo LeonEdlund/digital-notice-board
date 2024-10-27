@@ -80,7 +80,62 @@ function handleInfoBox() {
 }
 
 function formValidation() {
+  const titleInput = document.querySelector("input[name='title']");
+  const categoryInput = document.querySelector("select[name='category']");
+  const dateInput = document.querySelector("input[name='date']");
+  const checkBoxInput = document.querySelector("input[name='no-date']");
+  const descriptionInput = document.querySelector("textarea[name='description']");
+  const inputs = [titleInput, categoryInput, dateInput, descriptionInput];
 
+  document.getElementById("upload-form").addEventListener("submit", (e) => {
+    let valid = true;
+
+    if (titleInput.value.trim() === "") {
+      showError(titleInput, "Fyll i en titel");
+      valid = false;
+    }
+
+    if (categoryInput.value.trim() === "") {
+      showError(categoryInput, "Välj en kategori");
+      valid = false;
+    }
+
+    if (!checkBoxInput.checked && categoryInput.options[categoryInput.selectedIndex].dataset.date !== "no-date") {
+      if (dateInput && dateInput.value.trim() === "") {
+        showError(dateInput, "Välj ett datum");
+        valid = false;
+      }
+    }
+
+    if (descriptionInput.value.trim() === "") {
+      showError(descriptionInput, "Fyll i en beskrivning");
+      valid = false;
+    }
+
+    inputs.forEach(input => {
+      if (input.value.trim() !== "" && input.classList.contains("validation-error")) {
+        input.classList.remove("validation-error");
+        input.placeholder = "";
+      }
+    });
+
+    // Prevent form submission if any errors exist
+    if (!valid) {
+      e.preventDefault();
+    }
+  })
+
+  inputs.forEach(input => {
+    input.addEventListener("click", () => {
+      input.classList.remove("validation-error");
+    })
+
+  })
+}
+
+function showError(elem, message) {
+  elem.classList.add("validation-error");
+  elem.placeholder = message;
 }
 
 function clearDatePicker() {

@@ -1,7 +1,7 @@
 <?php
 class TextValidator
 {
-  public function validatePost($title, $category, $date, $body)
+  public function validatePost($title, $category, $body)
   {
     $errors = [];
 
@@ -15,12 +15,6 @@ class TextValidator
     // Validate category
     if ($this->strIsEmpty($category)) {
       $errors['category'] = 'Välj en kategori!';
-    }
-
-    // Validate date
-
-    if ($this->strIsEmpty($date)) {
-      $errors['date'] = 'Välj minst ett datum!';
     }
 
     // Validate body

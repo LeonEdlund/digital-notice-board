@@ -43,6 +43,18 @@ main {
   background-color: rgba(229, 229, 229, 0.344);
 }
 
+#category-name-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 15px;
+  padding: 20px 15px 20px 0px;
+}
+
+#category-name-menu h2 {
+  margin: 0;
+}
+
 /*----------- ASIDE MENU --------------*/
 aside {
   white-space: nowrap;
@@ -126,7 +138,7 @@ hgroup {
 }
 
 #modal-wrapper img {
-  max-width: 400px;
+  width: 400px;
   margin: auto;
   margin-bottom: 1rem;
 }
