@@ -7,11 +7,14 @@ class Database
 
   public function __construct()
   {
-    $dsn = 'mysql:dbname=interactive-screen;host=localhost';
-    $user = 'root';
-    $password = '';
+    $config = require 'config/db_config.php';
 
-    $this->dbh = new PDO($dsn, $user, $password, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]);
+    $this->dbh = new PDO(
+      $config['dsn'],
+      $config['username'],
+      $config['pwd'],
+      [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ]
+    );
     $this->categories = [
       "evenemang" => "event",
       "aktiviteter" => "activity",

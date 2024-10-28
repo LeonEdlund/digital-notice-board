@@ -8,14 +8,13 @@ function init() {
 /* --------- INITIALIZE DATEPICKER ------------ */
 function initializeDatePicker() {
   const elem = document.getElementById('datepicker');
+  // const dropdown = document.querySelectorAll('.datepicker-dropdown');
   const today = new Date();
-
   // set date 2 months in the future
   let twoMonthsAhead = new Date();
   twoMonthsAhead.setMonth(today.getMonth() + 2);
 
   new Datepicker(elem, {
-    clearButton: true,
     autohide: false,
     format: 'dd/mm',
     maxNumberOfDates: 10,
@@ -24,6 +23,16 @@ function initializeDatePicker() {
     dateDelimiter: ', ',
     language: 'sv'
   });
+
+  let footer = document.querySelector(".datepicker-footer .datepicker-controls");
+  let button = document.createElement("button");
+  button.textContent = "OK";
+  button.classList.add("btn", "btn-secondary");
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    dropdown.style.display = 'none';
+  });
+  footer.appendChild(button);
 }
 
 /* --------- EVENT LISTENERS ------------ */

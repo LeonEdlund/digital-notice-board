@@ -46,12 +46,15 @@
     <!-- ALL POSTS -->
     <section>
       <div id="category-name-menu">
-        <h2> <?= $menuItems[$page] ?? "Alla annonser" ?></h2>
-        <form action="" method="GET">
-          <input type="hidden" name="page" value="<?= htmlspecialchars($page) ?>">
-          <input type="date" name="search_date" value="<?= htmlspecialchars($_GET['search_date'] ?? '') ?>" max="<?= date('Y-m-d', strtotime('+2 months')) ?>">
-          <button type="submit">Sök</button>
-        </form>
+        <h2> <?= $menuItems[$page] ?? "🙌 Alla annonser" ?></h2>
+        <?php if ($page !== "kop-salj" && $page !== "efterlyst") : ?>
+          <form action="" method="GET">
+            <input type="hidden" name="page" value="<?= htmlspecialchars($page) ?>">
+            <label for="search_date">Sök vid datum: </label>
+            <input type="date" name="search_date" value="<?= htmlspecialchars($_GET['search_date'] ?? '') ?>" max="<?= date('Y-m-d', strtotime('+2 months')) ?>">
+            <button type="submit">Sök</button>
+          </form>
+        <?php endif ?>
       </div>
 
       <div id="post-grid">
@@ -72,7 +75,11 @@
               <footer>
                 <?php
                 if (!empty($post->dates) && $post->dates[0]->event_date) {
-                  echo "{$post->dates[0]->event_date}" .  " (" . count($post->dates) . "+)";
+                  if (count($post->dates) === 1) {
+                    echo "{$post->dates[0]->event_date}";
+                  } else {
+                    echo "{$post->dates[0]->event_date}" .  " (" . count($post->dates) . "+)";
+                  }
                 } else {
                   echo "Inget datum";
                 }
@@ -103,7 +110,7 @@
 
               <?php if ($post->dates) : ?>
                 <h4>Datum</h4>
-                <ul>
+                <ul class="dates-list">
                   <?php foreach ($post->dates as $date) : ?>
                     <li class="date-card"><?= $date->event_date ?? "" ?></li>
                   <?php endforeach  ?>

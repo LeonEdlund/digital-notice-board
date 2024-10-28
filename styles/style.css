@@ -4,6 +4,8 @@
   --padding-horizontal: 0 20px;
   --default-text-color: black;
   --default-red: rgb(155, 0, 0);
+  --border-radius: 12px;
+  --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.233);
 }
 
 html {
@@ -81,16 +83,33 @@ h2 {
   width: 100%;
   max-height: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
+  grid-template-columns: repeat(4, minmax(300px, 1fr));
   gap: 1rem;
   padding: 30px 20px 10rem 0;
   overflow-y: scroll;
 }
 
+@media screen and (max-width: 1550px) {
+  #post-grid {
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  #post-grid {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #post-grid {
+    grid-template-columns: repeat(1, minmax(300px, 1fr));
+  }
+}
 
 /*----------- CARD --------------*/
 .img-container {
-  height: 400px;
+  height: 320px;
 }
 
 .img-container img {
@@ -141,6 +160,44 @@ hgroup {
   width: 400px;
   margin: auto;
   margin-bottom: 1rem;
+}
+
+/* ------- DATE CARDS --------- */
+
+.pico ul li {
+  list-style: none;
+}
+
+.dates-list {
+  display: flex;
+  gap: 2rem;
+}
+
+.date-card {
+  background-color: rgb(255, 255, 255);
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.date-card::before {
+  content: "";
+  height: 25px;
+  width: 100%;
+  background-color: rgb(166, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /*----------- UPLOAD MODAL --------------*/

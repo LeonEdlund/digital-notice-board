@@ -8,7 +8,6 @@ const animationDuration = 400; // ms
 async function toggleModal(event, modalId) {
   event.preventDefault();
   const modal = document.getElementById(modalId);
-
   modal.open ? closeModal(modal) : openModal(modal);
 };
 
@@ -16,6 +15,8 @@ async function toggleModal(event, modalId) {
 function openModal(modal) {
   const { documentElement: html } = document;
   html.classList.add(isOpenClass, openingClass);
+
+  clearForm();
 
   setTimeout(() => {
     html.classList.remove(openingClass);
@@ -37,7 +38,9 @@ function closeModal(modal) {
 };
 
 function clearForm() {
-  document.querySelector("form").reset();
+  let form = document.querySelector("#upload-form");
+  form.reset();
+
   document.querySelectorAll(".validation-error").forEach(element => {
     element.classList.remove("validation-error");
   });

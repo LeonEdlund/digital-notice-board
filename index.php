@@ -1,20 +1,24 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require 'utils/functions.php';
 $page = (isset($_GET['page'])) ? trim($_GET['page']) : "alla";
 $searchDate = (isset($_GET['search_date']) && strlen($_GET['search_date']) > 0) ? trim($_GET['search_date']) : "";
 $postUploaded = false;
 $menuItems = [
-  "alla" => "Alla annonser",
-  "evenemang" => "Evenemang",
-  "aktiviteter" => "Aktiviteter",
-  "utbildning" => "Utbildning och Kurser",
-  "kop-salj" => "Köp/Sälj/Byt",
-  "efterlyst" => "Efterlyst/Borttappat",
-  "samhallsinformation" => "Samhällsinformation"
+  "alla" => "🙌 Alla annonser",
+  "evenemang" => "🎭 Evenemang",
+  "aktiviteter" => "💃 Aktiviteter",
+  "utbildning" => "👩‍🏫 Utbildning och Kurser",
+  "kop-salj" => "💰 Köp/Sälj/Byt",
+  "efterlyst" => "😿 Efterlyst/Borttappat",
+  "samhallsinformation" => "ℹ️ Samhällsinformation"
 ];
 
 // Database
-require_once("Models/DataBase.php");
+require_once("models/Database.php");
 $dbh = new Database();
 
 if ($searchDate) {
