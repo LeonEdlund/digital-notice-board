@@ -31,7 +31,7 @@
   <main>
     <!-- MENU -->
     <aside>
-      <nav>
+      <nav id="menu-list">
         <ul>
           <?php
           foreach ($menuItems as $key => $value) {
@@ -44,34 +44,33 @@
     </aside>
 
     <!-- ALL POSTS -->
-    <section>
-      <div id="category-name-menu">
-        <h2> <?= $menuItems[$page] ?? "🙌 Alla annonser" ?></h2>
+    <section id="posts-section">
+
+      <div id="category-name-menu" class="pico">
         <?php if ($page !== "kop-salj" && $page !== "efterlyst") : ?>
-          <form action="" method="GET">
+          <?= isset($_GET['date']) ? "<h2>{$_GET['date']}</h2>" : "" ?>
+          <form action="" method="GET" id="date-search-form">
             <input type="hidden" name="page" value="<?= htmlspecialchars($page) ?>">
-            <label for="search_date">Sök vid datum: </label>
-            <input type="date" name="search_date" value="<?= htmlspecialchars($_GET['search_date'] ?? '') ?>" max="<?= date('Y-m-d', strtotime('+2 months')) ?>">
-            <button type="submit">Sök</button>
+            <label for="datepicker-2"> Sök efter datum: </label>
+            <span id="calendar-icon">📅</span>
+            <input type="text" id="datepicker-2" name="date" />
           </form>
         <?php endif ?>
       </div>
 
       <div id="post-grid">
         <?php if (empty($posts)) : ?>
-          <h2>Inga annonser... :/</h2>
+          <p>Inga annonser... :/</p>
         <?php endif ?>
 
         <?php foreach ($posts as $post) : ?>
           <div data-id="<?= $page ?>" class="pico" onclick="toggleModal(event, 'modal-<?= $post->id ?>')">
             <article>
-              <header>
-                <strong><?= htmlspecialchars($post->title) ?></strong>
-              </header>
               <div class="img-container">
                 <img src="<?= htmlspecialchars($post->img) ?>" alt="">
               </div>
-              <p class="text-content"><?= htmlspecialchars($post->body) ?></p>
+              <h3 class="card-title"><strong><?= ucfirst(htmlspecialchars($post->title)) ?></strong></h3>
+              <p class="text-content"><?= nl2br(htmlspecialchars($post->body)) ?></p>
               <footer>
                 <?php
                 if (!empty($post->dates) && $post->dates[0]->event_date) {
@@ -103,16 +102,20 @@
             <img src="<?= htmlspecialchars($post->img) ?>" alt="">
             <div>
               <hgroup>
-                <h2><?= htmlspecialchars($post->title) ?></h2>
-                <h3><?= htmlspecialchars($post->created_at) ?></h3>
+                <h2><?= htmlspecialchars(ucfirst($post->title)) ?></h2>
+                <h3><?= htmlspecialchars(date('Y-m-d', strtotime($post->created_at))) ?></h3>
               </hgroup>
-              <p><?= htmlspecialchars($post->body) ?></p>
+              <p><?= nl2br(htmlspecialchars($post->body)) ?></p>
 
               <?php if ($post->dates) : ?>
-                <h4>Datum</h4>
+                <hr>
+                <h4>Datum för annonsen</h4>
                 <ul class="dates-list">
                   <?php foreach ($post->dates as $date) : ?>
-                    <li class="date-card"><?= $date->event_date ?? "" ?></li>
+                    <li class="date-card">
+                      <p class="date-red-bar"><?= $date->month ?></p>
+                      <p class="date-day"><?= $date->day ?></p>
+                    </li>
                   <?php endforeach  ?>
                 </ul>
               <?php endif  ?>
@@ -131,13 +134,13 @@
             <img src="images/qr.png" id="qr-placeholder" />
             <p>Scanna qr koden för att ladda upp en annons via mobilen! Då är det även möjligt att ladda upp en bild till din annons 🌆 📸</p>
           </div>
+
           <div id="line"></div>
+
           <div id="form-wrapper">
-            <h3>Ladda upp annons</h3>
-
             <form action="" method="POST" id="upload-form">
+              <h3>Ladda upp annons</h3>
               <input name="title" type="text" placeholder="Titel">
-
               <select name="category" id="category" aria-label="Välj kategori">
                 <option selected disabled value="">Kategori</option>
                 <option value="event" data-date="date">Evenemang</option>
@@ -164,7 +167,7 @@
 
                 <fieldset>
                   <label>
-                    <input type="checkbox" id="checkbox" name="no-date" />
+                    <input type="checkbox" id="checkbox" role="switch" name="no-date" />
                     Annonsen sker inte på något specifikt datum
                   </label>
                 </fieldset>

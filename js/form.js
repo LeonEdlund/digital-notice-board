@@ -2,15 +2,15 @@ window.addEventListener("DOMContentLoaded", init);
 
 function init() {
   initializeDatePicker();
+  initializeSecondDatePicker();
   addEventListeners();
 }
 
 /* --------- INITIALIZE DATEPICKER ------------ */
 function initializeDatePicker() {
   const elem = document.getElementById('datepicker');
-  // const dropdown = document.querySelectorAll('.datepicker-dropdown');
   const today = new Date();
-  // set date 2 months in the future
+
   let twoMonthsAhead = new Date();
   twoMonthsAhead.setMonth(today.getMonth() + 2);
 
@@ -28,11 +28,42 @@ function initializeDatePicker() {
   let button = document.createElement("button");
   button.textContent = "OK";
   button.classList.add("btn", "btn-secondary");
+
   button.addEventListener("click", (e) => {
     e.preventDefault();
-    dropdown.style.display = 'none';
+    const datePickerDropdown = footer.closest(".datepicker");;
+    if (datePickerDropdown.classList.contains("active")) {
+      datePickerDropdown.classList.remove("active");
+    }
+
   });
   footer.appendChild(button);
+}
+
+function initializeSecondDatePicker() {
+  const elem = document.getElementById('datepicker-2');
+  const today = new Date();
+
+  let twoMonthsAhead = new Date();
+  twoMonthsAhead.setMonth(today.getMonth() + 2);
+
+  new Datepicker(elem, {
+    autohide: false,
+    format: 'y-mm-dd',
+    minDate: today,
+    maxDate: twoMonthsAhead,
+    language: 'sv'
+  });
+
+  let footer = document.querySelector(".datepicker-footer .datepicker-controls");
+  let button = document.createElement("button");
+  button.textContent = "SÖK";
+  button.classList.add("btn", "btn-secondary");
+  footer.appendChild(button);
+
+  document.getElementById("calendar-icon").addEventListener("click", () => {
+    elem.focus();
+  })
 }
 
 /* --------- EVENT LISTENERS ------------ */

@@ -1,10 +1,10 @@
 /*----------- DEFAULT --------------*/
 :root {
-  --thin-line: 0px 1px 1px rgba(181, 181, 181, 0.102);
+  --thin-line: 0px 2px 1px rgba(181, 181, 181, 0.102);
   --padding-horizontal: 0 20px;
   --default-text-color: black;
   --default-red: rgb(155, 0, 0);
-  --border-radius: 12px;
+  --border-radius: 11px;
   --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.233);
 }
 
@@ -19,6 +19,10 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 a {
@@ -37,6 +41,7 @@ header nav {
   align-items: center;
   padding: 10px 20px;
   box-shadow: var(--thin-line);
+  position: sticky;
 }
 
 main {
@@ -47,7 +52,7 @@ main {
 
 #category-name-menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   padding-right: 15px;
   padding: 20px 15px 20px 0px;
@@ -70,23 +75,39 @@ aside ul {
   font-size: 1.2rem;
 }
 
-#active {
-  text-decoration: underline;
+#menu-list a {
+  background-color: white;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  display: block;
+}
+
+#menu-list a:focus {
+  transform: scale(0.95);
+}
+
+#menu-list #active {
+  background-color: hsl(0, 0%, 20%);
+  color: white;
 }
 
 /*----------- GRID SECTION --------------*/
+#posts-section {
+  height: 100%;
+  overflow-y: scroll;
+}
+
 h2 {
   margin-top: 1rem;
 }
 
 #post-grid {
   width: 100%;
-  max-height: 100%;
   display: grid;
   grid-template-columns: repeat(4, minmax(300px, 1fr));
   gap: 1rem;
-  padding: 30px 20px 10rem 0;
-  overflow-y: scroll;
+  padding: 0px 20px 10rem 0;
 }
 
 @media screen and (max-width: 1550px) {
@@ -108,6 +129,11 @@ h2 {
 }
 
 /*----------- CARD --------------*/
+
+#post-grid article:active {
+  transform: scale(0.98);
+}
+
 .img-container {
   height: 320px;
 }
@@ -119,12 +145,31 @@ h2 {
   object-position: top;
 }
 
+#post-grid article h3 {
+  margin-top: 0.5rem;
+  width: 100%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 article footer {
   display: flex;
   justify-content: end;
 }
 
 /*----------- POST MODALS --------------*/
+.post-modal article {
+  position: relative;
+}
+
+.post-modal button {
+  position: sticky;
+  top: 5px;
+  right: 5px;
+  /* Adjust these values as needed */
+}
+
 .pico dialog article {
   max-width: 1100px;
   height: 80vh;
@@ -135,8 +180,13 @@ article footer {
 }
 
 .text-content {
-  height: 6rem;
+  height: 6.5rem;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  font-size: 110%;
 }
 
 .pico dialog #close {
@@ -176,28 +226,30 @@ hgroup {
 .date-card {
   background-color: rgb(255, 255, 255);
   box-shadow: var(--box-shadow);
-  padding: 1rem;
   border-radius: var(--border-radius);
   width: 100%;
   max-width: 130px;
-  aspect-ratio: 1/1;
   display: grid;
   place-items: center;
   font-size: 2rem;
   font-weight: 600;
-  position: relative;
+  overflow: hidden;
 }
 
-.date-card::before {
-  content: "";
-  height: 25px;
+.pico .date-red-bar {
   width: 100%;
   background-color: rgb(166, 0, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: white;
+}
+
+#date-search-form {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
 }
 
 /*----------- UPLOAD MODAL --------------*/
@@ -215,8 +267,8 @@ hgroup {
 }
 
 #checkbox {
-  height: 2rem;
-  width: 2rem;
+  transform: scale(1.5);
+  margin: 0 13px;
 }
 
 #upload-grid {
@@ -300,6 +352,17 @@ form {
   font-size: 1rem;
 }
 
+.datepicker-footer .datepicker-controls {
+  padding: 0.8rem;
+  display: flex;
+  justify-content: right;
+  font-size: 1rem;
+}
+
+.datepicker-footer .datepicker-controls button {
+  width: 100%;
+}
+
 
 #icon-wrapper {
   position: relative;
@@ -331,4 +394,11 @@ form {
 form .validation-error {
   border-color: rgb(255, 140, 140);
   background-color: rgba(255, 186, 186, 0.121);
+}
+
+#datepicker-2 {
+  opacity: 0;
+  width: 0px;
+  margin: 0;
+  padding: 0;
 }

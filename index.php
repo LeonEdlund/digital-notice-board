@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require 'utils/functions.php';
 $page = (isset($_GET['page'])) ? trim($_GET['page']) : "alla";
-$searchDate = (isset($_GET['search_date']) && strlen($_GET['search_date']) > 0) ? trim($_GET['search_date']) : "";
+$searchDate = (isset($_GET['date']) && strlen($_GET['date']) > 0) ? trim($_GET['date']) : "";
 $postUploaded = false;
 $menuItems = [
   "alla" => "🙌 Alla annonser",

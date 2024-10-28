@@ -113,9 +113,15 @@ class Database
     $query = "SELECT event_date FROM event_dates WHERE ad_id = :ad_id ORDER BY event_date";
     $date = $this->query($query, [':ad_id' => $adId])->fetchAll();
 
+    $formatter = new IntlDateFormatter('sv_SE', IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+    $formatter->setPattern('MMM');
+
     foreach ($date as $key => $value) {
       $dateTime = DateTime::createFromFormat('Y-m-d', $value->event_date);
+
       $date[$key]->event_date = $dateTime->format('d/m');
+      $date[$key]->month = $formatter->format($dateTime);
+      $date[$key]->day = $dateTime->format('d');
     }
 
     return $date;
