@@ -4,6 +4,25 @@ function init() {
   initializeDatePicker();
   initializeSecondDatePicker();
   addEventListeners();
+  initializeKeyboard();
+
+};
+
+/* --------- INITIALIZE KEYBOARD ------------ */
+function initializeKeyboard() {
+  const Keyboard = window.SimpleKeyboard.default;
+
+  const myKeyboard = new Keyboard({
+    layout: {
+      'default': [
+        '` 1 2 3 4 5 6 7 8 9 0 = {bksp}',
+        '{tab} q w e r t y u i o p å ^ \\',
+        '{lock} a s d f g h j k l ö ä {enter}',
+        '{shift} z x c v b n m , . - {shift}',
+        '{space} @'
+      ]
+    }
+  });
 }
 
 /* --------- INITIALIZE DATEPICKER ------------ */
@@ -122,7 +141,7 @@ function handleInfoBox() {
 function formValidation() {
   const titleInput = document.querySelector("input[name='title']");
   const categoryInput = document.querySelector("select[name='category']");
-  const dateInput = document.querySelector("input[name='date']");
+  const dateInput = document.querySelector("input[name='event_date']");
   const checkBoxInput = document.querySelector("input[name='no-date']");
   const descriptionInput = document.querySelector("textarea[name='description']");
   const inputs = [titleInput, categoryInput, dateInput, descriptionInput];
@@ -151,6 +170,8 @@ function formValidation() {
       showError(descriptionInput, "Fyll i en beskrivning");
       valid = false;
     }
+
+    console.log("valid");
 
     inputs.forEach(input => {
       if (input.value.trim() !== "" && input.classList.contains("validation-error")) {

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-201.613,0)">
+        <g transform="matrix(1,0,0,1,201.613,0)">
+            <rect id="all" x="0" y="0" width="50" height="50" style="fill:rgb(133,147,203);"/>
+            <g id="all1" serif:id="all">
+                <g transform="matrix(0.670538,0,0,0.670538,-98.1034,12.879)">
+                    <g transform="matrix(16,0,0,16,204.948,23.8031)">
+                    </g>
+                    <text x="162.292px" y="23.803px" style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:16px;fill:white;">ALLA</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

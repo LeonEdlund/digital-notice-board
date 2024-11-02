@@ -20,6 +20,7 @@ class Database
       "aktiviteter" => "activity",
       "utbildning" => "education",
       "kop-salj" => "buy",
+      "jobb" => "work",
       "efterlyst" => "lost",
       "samhallsinformation" => "info",
       "ovrigt" => "else"
